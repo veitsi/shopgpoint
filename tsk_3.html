@@ -12,7 +12,10 @@
 <body>
 <script src="https://unpkg.com/vue"></script>
 <div id="app">
-    <button v-on:click="yo">reload</button>
+    <div class="text-center">
+        <button v-on:click="yo">reload</button>
+    </div>
+
     <table class="table">
         <thead>
         <tr>
@@ -52,7 +55,7 @@
                         if (responce.status === 200) {
                             return responce.json();
                         }
-                    }).then((data)=>{
+                    }).then((data) => {
                     console.log(data);
                     self.rows = data;
                 });
@@ -71,6 +74,15 @@
                 }]
         }
     })
+</script>
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+        crossorigin="anonymous"></script>
+<script>
+    //here jQuery is used to prevent raw screen
+    $(function () {
+        $("#app").hide;
+    });
 </script>
 </body>
 </html>
