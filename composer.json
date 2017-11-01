@@ -1,0 +1,11 @@
+{
+    "name": "vetsinen/gamepoint",
+    "type": "project",
+    "authors": [
+        {
+            "name": "vetsinen",
+            "email": "vetsinen@gmail.com"
+        }
+    ],
+    "require": {}
+}

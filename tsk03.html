@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+</head>
+<body>
+<script src="https://unpkg.com/vue"></script>
+<div id="app">
+    {{ message }}
+    <button v-on:click="yo">reload</button>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>PaymentID</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>MethodName</th>
+            <th>ProductName</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="row in rows">
+            <td>{{row.Firstname}}</td>
+            <td>{{row.Lastname}}</td>
+            <td>{{row.PaymentID}}</td>
+            <td>{{row.Price}}</td>
+            <td>{{row.Status}}</td>
+            <td>{{row.MethodName}}</td>
+            <td>{{row.ProductName}}</td>
+            <!--<td>{{row}}</td>-->
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        methods: {
+            yo: function () {
+                var self = this;
+                fetch('http://localhost/gamepoint/assignment_3.php')
+                    .then((responce) => {
+                        console.log(responce.status);
+                        if (responce.status === 200) {
+                            return responce.json();
+                        }
+                    }).then((data)=>{
+                    console.log(data);
+                    self.rows = data;
+                });
+            }
+        },
+        data: {
+            message: 'Hello Vue!',
+            rows:
+                [{
+                    "Firstname": "Henk",
+                    "Lastname": "Wijngaard",
+                    "PaymentID": "1",
+                    "Price": "100",
+                    "Status": "authorised",
+                    "MethodName": "Phone PPC",
+                    "ProductName": "Coins"
+                }, {
+                    "Firstname": "Henk",
+                    "Lastname": "Wijngaard",
+                    "PaymentID": "2",
+                    "Price": "140",
+                    "Status": "authorised",
+                    "MethodName": "Phone PPC",
+                    "ProductName": "Coins"
+                }]
+        }
+    })
+</script>
+<!-- jQuery first, then Tether, then Bootstrap JS. -->
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+        integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+        crossorigin="anonymous"></script>
+</body>
+</html>
