@@ -26,6 +26,7 @@ class Model_Product extends RedBean_SimpleModel
     {
         $this->price = $price;
     }
+
     public function getPrice(int $price)
     {
         return $this->price;
@@ -36,8 +37,9 @@ class Model_Method extends RedBean_SimpleModel
 {
     function setPaidPrice(int $price)
     {
-        $this->price=$price;
+        $this->price = $price;
     }
+
     function paidPrice()
     {
         return $this->price;
@@ -69,11 +71,6 @@ class PaymentMethodFactory
     }
 }
 
-$user = User::getInstanceById(334);
-$product = ProductFactory::create('vip');
-$product->setPrice(100); // in cents
-$paymentMethod = PaymentMethodFactory::create('paypal');
-
 class Payment
 {
     var $method;
@@ -87,11 +84,18 @@ class Payment
     {
         return $this->method;
     }
+
     function authorize()
     {
         return true;
     }
 }
+
+$user = User::getInstanceById(334);
+$product = ProductFactory::create('vip');
+$product->setPrice(100); // in cents
+$paymentMethod = PaymentMethodFactory::create('paypal');
+
 
 $payment = new Payment($user, $product, $paymentMethod);
 $paymentMethod->setPaidPrice(100);
@@ -99,3 +103,18 @@ $paymentMethod->setPaidPrice(100);
 if ($payment->getMethod()->isApproved() && $payment->getProduct()->getPrice() == $payment->getMethod()->paidPrice()) {
     var_dump($payment->authorize());
 }
+
+//require_once ('rb-mysql.php');
+//R::setup( 'mysql:host=localhost;dbname=gamepoint',
+//    'gamepoint', 'gamepointtrialzday' );
+////$method = R::inspect( 'method' );
+////echo gettype($method);
+//
+//$method = R::load( 'method', 1 );
+//print_r($method->name);
+//$listOfTables = R::inspect();
+//foreach ($listOfTables as $table)
+//{
+//    echo $table;
+//    print_r(R::inspect($table));}
+//R::close();

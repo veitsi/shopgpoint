@@ -18,7 +18,8 @@
  * */
 //SELECT * FROM user JOIN payment on user.id = payment.userID JOIN method on payment.methodID=method.id JOIN shoppingCart on payment.id=shoppingCart.paymentID JOIN shoppingCartContent on shoppingCart.id = shoppingCartContent.cartID JOIN product as pr on pr.id = shoppingCartContent.productID
 
-//json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+//here is backend of web app
+//frontend is in file tsk_3.html
 $pdo = new PDO('mysql:host=localhost;dbname=gamepoint', 'gamepoint', 'gamepointtrialzday');
 $statement = $pdo->query('SELECT user.firstname as Firstname,user.lastname as Lastname,payment.id as PaymentID,payment.totalPrice as Price,payment.status as Status, method.name as MethodName, pr.name as ProductName FROM user JOIN payment on user.id = payment.userID JOIN method on payment.methodID=method.id JOIN shoppingCart on payment.id=shoppingCart.paymentID JOIN shoppingCartContent on shoppingCart.id = shoppingCartContent.cartID JOIN product as pr on pr.id = shoppingCartContent.productID');
 $rows = json_encode($statement->fetchAll(PDO::FETCH_ASSOC));

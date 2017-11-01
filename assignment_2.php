@@ -41,8 +41,10 @@
 //*    Password: gamepointtrialzday
 //*    Database: gamepoint
 const query = 'SELECT * FROM user JOIN payment on user.id = payment.userID WHERE user.firstname="Henk"';
-//Для того, чтобы всего лишь показать ошибку, try..catch используют только ...:
-// РНР покажет ошибку и так, безо всяких try..catch.
+// why try..catch was not used?
+// 1. РНР shows try..catch error by default in console and other essential places.
+// 2. try..catch need to be used only if we really handle source of problem
+// 3. and many other reasons
 //- во-вторых, этот код гораздо менее гибкий: он выводит ошибку ТОЛЬКО на экран, в то время как исключение улетит туда же, куда и все остальные ошибки: либо в лог файл, либо на экран, в зависимости от глобальных настроек.
 //Поэтому использовать try..catch нужно только тогда, когда вы собираетесь ОБРАБОТАТЬ ошибку - то есть, совершить какое-то действие, связанное с ФАКТОМ ошибки - откатить транзакцию, например. Для того же, чтобы просто выдать сообщение об ошибке, try..catch использовать не нужно - PHP прекрасно справится сам
 
@@ -50,4 +52,3 @@ $pdo = new PDO('mysql:host=localhost;dbname=gamepoint', 'gamepoint', 'gamepointt
 $statement = $pdo->query(query);
 $rows = $statement->fetchAll(PDO::FETCH_NUM);
 var_dump($rows);
-//echo htmlentities($row['some_field']);
